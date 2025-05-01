@@ -1,0 +1,9 @@
+:root {
+  --system-color-dark: oklch(0% 0 0);
+  --system-color-light: oklch(100% 0 0);
+  --system-color-logo: oklch(60.07% 0.241 28.73 / 80%);
+  --system-color-red-100: oklch(60.07% 0.241 28.73 / 25%);
+  --system-color-red-200: oklch(60.07% 0.241 28.73 / 50%);
+  --system-color-red-300: oklch(60.07% 0.241 28.73 / 100%);
+  /* ... rest of your CSS ... */
+}
