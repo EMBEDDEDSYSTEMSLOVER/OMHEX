@@ -22,7 +22,8 @@
       flex-direction: column;
       justify-content: center;
       align-items: center;
-      z-index: 1;
+      z-index: 2;
+      text-align: center;
     }
 
     h1 {
@@ -54,6 +55,7 @@
       position: absolute;
       font-size: 2rem;
       animation: float 20s linear infinite;
+      z-index: 3;
     }
 
     @keyframes float {
@@ -83,9 +85,46 @@
         transform: translateX(-50%) rotate(180deg);
       }
     }
+
+    .planet {
+      position: absolute;
+      border-radius: 50%;
+      opacity: 0.7;
+      z-index: 1;
+      animation: drift linear infinite;
+    }
+
+    @keyframes drift {
+      0% {
+        transform: translateY(0);
+      }
+      100% {
+        transform: translateY(-120vh);
+      }
+    }
   </style>
 </head>
 <body>
+  <!-- Floating Planets -->
+  <script>
+    const colors = ['#ff6f61', '#42a5f5', '#7e57c2', '#4db6ac', '#ffee58'];
+    const count = 15;
+
+    for (let i = 0; i < count; i++) {
+      const planet = document.createElement('div');
+      planet.classList.add('planet');
+      const size = Math.random() * 30 + 10;
+      planet.style.width = `${size}px`;
+      planet.style.height = `${size}px`;
+      planet.style.background = colors[Math.floor(Math.random() * colors.length)];
+      planet.style.left = `${Math.random() * 100}vw`;
+      planet.style.top = `${Math.random() * 100 + 100}vh`;
+      planet.style.animationDuration = `${10 + Math.random() * 20}s`;
+      document.body.appendChild(planet);
+    }
+  </script>
+
+  <!-- Content -->
   <div class="content">
     <h1><span class="om">OM</span><span class="hex">HEX</span></h1>
     <div class="subtitle">Operating Machines for Health Experience</div>
