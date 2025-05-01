@@ -37,7 +37,7 @@
     h1 {
       font-size: 5rem;
       margin: 0;
-      animation: glow 2s ease-in-out infinite alternate;
+      /* Glow animation removed */
     }
 
     .om { color: white; }
@@ -56,15 +56,6 @@
       backdrop-filter: blur(4px);
       box-shadow: 0 0 15px rgba(0, 255, 136, 0.4);
       animation: pulse 4s ease-in-out infinite, shimmer 6s linear infinite;
-    }
-
-    @keyframes glow {
-      from {
-        text-shadow: 0 0 10px #00ffcc, 0 0 20px #00ffcc;
-      }
-      to {
-        text-shadow: 0 0 20px #00ffe6, 0 0 40px #00ffe6;
-      }
     }
 
     @keyframes pulse {
