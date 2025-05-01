@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ALI KHAN</title>
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      background: linear-gradient(135deg, #000000, #1a1a1a);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      font-family: 'Segoe UI', sans-serif;
+    }
+
+    h1 {
+      font-size: 5rem;
+      color: #00ffcc;
+      animation: glow 2s ease-in-out infinite alternate;
+      text-shadow: 0 0 10px #00ffcc, 0 0 20px #00ffcc, 0 0 40px #00ffcc;
+    }
+
+    @keyframes glow {
+      from {
+        text-shadow: 0 0 10px #00ffcc, 0 0 20px #00ffcc;
+      }
+      to {
+        text-shadow: 0 0 20px #00ffe6, 0 0 40px #00ffe6, 0 0 60px #00ffe6;
+      }
+    }
+  </style>
+</head>
+<body>
+  <h1>ALI KHAN</h1>
+</body>
+</html>
