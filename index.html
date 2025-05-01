@@ -1,25 +1,156 @@
-<main class="solar-system">
-  <article class="solar-system__sun"></article>
-  <section class="solar-system__mercury-trajectory">
-    <article class="solar-system__mercury-trajectory__mercury"></article>
-  </section>
-  <section class="solar-system__venus-trajectory">
-    <article class="solar-system__venus-trajectory__venus"></article>
-  </section>
-  <section class="solar-system__earth-trajectory">
-    <article class="solar-system__earth-trajectory__earth"></article>
-  </section>
-  <section class="solar-system__mars-trajectory">
-    <article class="solar-system__mars-trajectory__mars"></article>
-  </section>
-  <!-- [♃,♄,⛢,♆] are too far for my little starship. 🚀🪐-->
-</main>
-<footer>
-  <a target="_blank" rel="noopener noreferrer" href="https://linktr.ee/delvignefred" aria-label="All my social media links">
-    <svg id="logo" xmlns="http://www.w3.org/2000/svg" viewbox="0 0 400 400" aria-hidden="true">
-      <circle cx="200" cy="200" r="196.6"></circle>
-      <path d="M302.9,84.4H170.5h-8.1c-23.3,0-34.9,9.1-45,29.4l-26.2,52.3c-6,12.2-8.9,20.8-8.9,34.5    c0,11.9,3.3,22,8.6,32.8l27.1,54.3c10.4,21.2,23.9,28,47.1,28h20.3c0,0,0,0,0,0c0,0,0,0,0,0h29.2c7.8,0,14.9-3.5,14.9-14.2    c0-10.7-7.2-14.2-14.9-14.2h-15.3v-96.6h74.3c7.8,0,14.9-4.6,14.9-15.4c0-10.7-7.2-15.4-14.9-15.4h-74.3v-45.2h103.6    c7.8,0,14.9-4.3,14.9-15.1C317.8,88.8,310.6,84.4,302.9,84.4z M170.3,287.1h-5.5c-12.5,0-15.5-2.2-20.9-13.2l-26.2-53.4    c-3.3-6.9-5.7-12.1-5.7-19.6c0-10.1,3.3-15.9,7.5-24.5l24.8-49.8c6.3-12.8,8.9-12,22.7-12h3.4V287.1z">
-      </path>
-    </svg>
-  </a>
-</footer>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>OMHEX</title>
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      background: black;
+      font-family: 'Segoe UI', sans-serif;
+      color: white;
+      overflow: hidden;
+    }
+
+    canvas#galaxy {
+      position: absolute;
+      top: 0;
+      left: 0;
+      z-index: 0;
+    }
+
+    .content {
+      position: relative;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      z-index: 2;
+      text-align: center;
+      pointer-events: none;
+    }
+
+    h1 {
+      font-size: 5rem;
+      margin: 0;
+      animation: glow 2s ease-in-out infinite alternate;
+    }
+
+    .om { color: white; }
+    .hex { color: #00ff88; }
+
+    .subtitle {
+      font-size: 1.2rem;
+      color: #ccc;
+      margin-top: 1rem;
+      letter-spacing: 1px;
+    }
+
+    @keyframes glow {
+      from {
+        text-shadow: 0 0 10px #00ffcc, 0 0 20px #00ffcc;
+      }
+      to {
+        text-shadow: 0 0 20px #00ffe6, 0 0 40px #00ffe6;
+      }
+    }
+
+    .planet {
+      position: absolute;
+      border-radius: 50%;
+      opacity: 0.7;
+      z-index: 1;
+      animation: drift linear infinite;
+    }
+
+    @keyframes drift {
+      0% {
+        transform: translateY(0);
+      }
+      100% {
+        transform: translateY(-120vh);
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Galaxy Canvas Background -->
+  <canvas id="galaxy"></canvas>
+
+  <!-- Floating Planets -->
+  <script>
+    const colors = ['#ff6f61', '#42a5f5', '#7e57c2', '#4db6ac', '#ffee58'];
+    const count = 15;
+
+    for (let i = 0; i < count; i++) {
+      const planet = document.createElement('div');
+      planet.classList.add('planet');
+      const size = Math.random() * 30 + 10;
+      planet.style.width = `${size}px`;
+      planet.style.height = `${size}px`;
+      planet.style.background = colors[Math.floor(Math.random() * colors.length)];
+      planet.style.left = `${Math.random() * 100}vw`;
+      planet.style.top = `${Math.random() * 100 + 100}vh`;
+      planet.style.animationDuration = `${10 + Math.random() * 20}s`;
+      document.body.appendChild(planet);
+    }
+  </script>
+
+  <!-- Content -->
+  <div class="content">
+    <h1><span class="om">OM</span><span class="hex">HEX</span></h1>
+    <div class="subtitle">A company of ACK & OSAVI</div>
+  </div>
+
+  <!-- Galaxy Star Animation Script -->
+  <script>
+    const canvas = document.getElementById('galaxy');
+    const ctx = canvas.getContext('2d');
+
+    let stars = [];
+    const numStars = 150;
+
+    function resizeCanvas() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+
+    window.addEventListener('resize', resizeCanvas);
+    resizeCanvas();
+
+    function createStars() {
+      stars = [];
+      for (let i = 0; i < numStars; i++) {
+        stars.push({
+          x: Math.random() * canvas.width,
+          y: Math.random() * canvas.height,
+          radius: Math.random() * 1.5,
+          alpha: Math.random(),
+          delta: (Math.random() * 0.02) + 0.005
+        });
+      }
+    }
+
+    function drawStars() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      for (let star of stars) {
+        ctx.beginPath();
+        ctx.arc(star.x, star.y, star.radius, 0, 2 * Math.PI);
+        ctx.fillStyle = `rgba(255, 255, 255, ${star.alpha})`;
+        ctx.fill();
+
+        star.alpha += star.delta;
+        if (star.alpha <= 0 || star.alpha >= 1) star.delta = -star.delta;
+      }
+      requestAnimationFrame(drawStars);
+    }
+
+    createStars();
+    drawStars();
+  </script>
+</body>
+</html>
