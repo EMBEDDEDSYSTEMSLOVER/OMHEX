@@ -15,6 +15,13 @@
       overflow: hidden;
     }
 
+    canvas#galaxy {
+      position: absolute;
+      top: 0;
+      left: 0;
+      z-index: 0;
+    }
+
     .content {
       position: relative;
       height: 100%;
@@ -24,6 +31,7 @@
       align-items: center;
       z-index: 2;
       text-align: center;
+      pointer-events: none;
     }
 
     h1 {
@@ -70,6 +78,9 @@
   </style>
 </head>
 <body>
+  <!-- Galaxy Canvas Background -->
+  <canvas id="galaxy"></canvas>
+
   <!-- Floating Planets -->
   <script>
     const colors = ['#ff6f61', '#42a5f5', '#7e57c2', '#4db6ac', '#ffee58'];
@@ -94,5 +105,52 @@
     <h1><span class="om">OM</span><span class="hex">HEX</span></h1>
     <div class="subtitle">A company of ACK & OSAVI</div>
   </div>
+
+  <!-- Galaxy Star Animation Script -->
+  <script>
+    const canvas = document.getElementById('galaxy');
+    const ctx = canvas.getContext('2d');
+
+    let stars = [];
+    const numStars = 150;
+
+    function resizeCanvas() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+
+    window.addEventListener('resize', resizeCanvas);
+    resizeCanvas();
+
+    function createStars() {
+      stars = [];
+      for (let i = 0; i < numStars; i++) {
+        stars.push({
+          x: Math.random() * canvas.width,
+          y: Math.random() * canvas.height,
+          radius: Math.random() * 1.5,
+          alpha: Math.random(),
+          delta: (Math.random() * 0.02) + 0.005
+        });
+      }
+    }
+
+    function drawStars() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      for (let star of stars) {
+        ctx.beginPath();
+        ctx.arc(star.x, star.y, star.radius, 0, 2 * Math.PI);
+        ctx.fillStyle = `rgba(255, 255, 255, ${star.alpha})`;
+        ctx.fill();
+
+        star.alpha += star.delta;
+        if (star.alpha <= 0 || star.alpha >= 1) star.delta = -star.delta;
+      }
+      requestAnimationFrame(drawStars);
+    }
+
+    createStars();
+    drawStars();
+  </script>
 </body>
 </html>
